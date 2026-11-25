@@ -4,7 +4,7 @@ Estimate the historical sale price of a home in Ames, Iowa using its above-groun
 
 **2010 test result:** The model’s estimates differed from recorded prices by **US$23,467 on average** across 341 sales. A baseline that always predicted the development-set median missed by US$52,386 on average.
 
-[Explore the master notebook](ames_house_price_prediction.ipynb) · [Presentation and interview guide](docs/presentation.md)
+[Explore the master notebook](ames_house_price_prediction.ipynb)
 
 ![Local app showing the North Ames example estimate of US$176,583](docs/demo.png)
 
