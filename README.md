@@ -18,6 +18,10 @@ Part 2 continues in the same notebook. We use 2,589 sales from 2006–2009 for e
 
 The notebook separates the 2006–2008 fitting period from 2009 validation, prepares numeric and neighbourhood inputs, and checks that both sets have matching columns.
 
+## Part 4 · Compare models
+
+On the 648 validation sales from 2009, linear regression averaged **US$26,372** in absolute error, compared with **US$56,861** for the training median. Linear regression is the candidate for Part 5. The 2010 test performance is still unknown.
+
 ## Run the notebook in VS Code
 
 Install the Python and Jupyter extensions. From a Windows Miniconda prompt, run the following commands.
@@ -40,6 +44,6 @@ If you already have a local clone, open its folder and run `git pull --ff-only` 
 - [x] **1. Project setup and dataset** — Load real sales, inspect example records and distinguish features from the target.
 - [x] **2. Explore the data** — Reserve test sales and investigate patterns in the training set.
 - [x] **3. Prepare features** — Handle missing values and encode categories inside a reusable pipeline.
-- [ ] **4. Compare models** — Compare linear regression with a median-price baseline on validation data.
+- [x] **4. Compare models** — Compare linear regression with a median-price baseline on validation data.
 - [ ] **5. Evaluate predictions** — Investigate errors, finalize the model and report held-out performance.
 - [ ] **6. Build and present the app** — Package the pipeline, demonstrate a prediction and document limitations.
