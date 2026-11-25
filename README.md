@@ -14,6 +14,10 @@ The data comes from the Ames Assessor's Office and covers 2006–2010. This repo
 
 Part 2 continues in the same notebook. We use 2,589 sales from 2006–2009 for exploration and reserve 341 sales from 2010 for final testing. In the training data, the median sale price was **$161,500**. Living area and price had a correlation of **0.709**, with a broad range of prices even for homes of similar size.
 
+## Part 3 · Prepare the features
+
+The notebook separates the 2006–2008 fitting period from 2009 validation, prepares numeric and neighbourhood inputs, and checks that both sets have matching columns.
+
 ## Run the notebook in VS Code
 
 Install the Python and Jupyter extensions. From a Windows Miniconda prompt, run the following commands.
@@ -35,7 +39,7 @@ If you already have a local clone, open its folder and run `git pull --ff-only` 
 
 - [x] **1. Project setup and dataset** — Load real sales, inspect example records and distinguish features from the target.
 - [x] **2. Explore the data** — Reserve test sales and investigate patterns in the training set.
-- [ ] **3. Prepare features** — Handle missing values and encode categories inside a reusable pipeline.
+- [x] **3. Prepare features** — Handle missing values and encode categories inside a reusable pipeline.
 - [ ] **4. Compare models** — Compare linear regression with a median-price baseline on validation data.
 - [ ] **5. Evaluate predictions** — Investigate errors, finalize the model and report held-out performance.
 - [ ] **6. Build and present the app** — Package the pipeline, demonstrate a prediction and document limitations.
