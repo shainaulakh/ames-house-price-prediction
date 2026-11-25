@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ames house price estimator</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2f1e9;color:#19362e;font-family:"DM Sans",system-ui,sans-serif}
+main{max-width:790px;margin:6vh auto;padding:clamp(20px,5vw,44px)}
+h1{font:normal clamp(36px,6vw,56px)/1.05 Georgia,serif;letter-spacing:-.04em;margin:12px 0}
+p{line-height:1.6}form{margin:30px 0 16px;padding:26px;background:white;border:1px solid #c8d2c6;border-radius:12px}
+section{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{font-size:14px;font-weight:600}input,select,button{font:inherit;border-radius:5px}
+input,select{display:block;margin-top:6px;width:100%;padding:11px;border:1px solid #85958b;background:#fbfcfa;color:#19362e}
+button{margin-top:22px;background:#225642;color:white;padding:12px 20px;border:0;cursor:pointer}
+output{display:block;margin-top:18px;color:#21503d}output:empty{display:none}strong{display:block;font:normal 36px Georgia,serif}
+small{color:#395549}@media(max-width:480px){section{grid-template-columns:1fr}main{margin:0 auto}form{padding:18px}}
+</style></head><body><main><h1>Ames house price estimator</h1>
+<p>Estimate a historical residential sale price in Ames, Iowa. Choose the home’s characteristics and use the assessor’s quality scale, from 1 (very poor) to 10 (excellent).</p>
+<form method="get"><section>$fields</section><button>Estimate price</button><output aria-live="polite">$result</output></form>
+<small>Historical US dollars · Trained on 2006–2009 sales. Average absolute error on the 2010 test set was US&#36;23,467. Individual errors vary.</small>
+</main></body></html>

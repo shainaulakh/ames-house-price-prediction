@@ -2,3 +2,4 @@ pandas==2.2.3
 ipykernel>=6.29,<8
 matplotlib==3.10.8
 scikit-learn==1.8.0
+joblib==1.5.3

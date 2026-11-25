@@ -1,30 +1,16 @@
 # Ames House Price Prediction
 
-Can a home's living area, neighbourhood and year of construction help estimate its sale price? This six-part machine learning project starts with historical sales in Ames, Iowa. The eventual goal is a small app that estimates a sale price in US dollars.
+Estimate the historical sale price of a home in Ames, Iowa using its above-ground living area, neighbourhood, construction year and overall quality. The project includes one executed notebook and a local browser app that loads the same fitted scikit-learn pipeline.
 
-## Part 1 · Understand the dataset
+**2010 test result:** The model’s estimates differed from recorded prices by **US$23,467 on average** across 341 sales. A baseline that always predicted the development-set median missed by US$52,386 on average.
 
-Part 1 of the [master notebook](ames_house_price_prediction.ipynb) shows the dimensions, column types and three example sales. Each row represents one residential sale. The target is `price`. The fields `area`, `Neighborhood` and `Year.Built` are examples of information available before a sale.
+[Explore the master notebook](ames_house_price_prediction.ipynb) · [Presentation and interview guide](docs/presentation.md)
 
-The data comes from the Ames Assessor's Office and covers 2006–2010. This repository uses OpenIntro's CSV and credits the original study by Dean De Cock. Prices describe that historical market. Applying a future model to current prices or other cities would require new data and evaluation.
+![Local app showing the North Ames example estimate of US$176,583](docs/demo.png)
 
-[OpenIntro dataset and documentation](https://www.openintro.org/data/index.php?data=ames) · [Original study](https://doi.org/10.1080/10691898.2011.11889627)
+## Try the app
 
-## Part 2 · Explore training sales
-
-Part 2 continues in the same notebook. We use 2,589 sales from 2006–2009 for exploration and reserve 341 sales from 2010 for final testing. In the training data, the median sale price was **$161,500**. Living area and price had a correlation of **0.709**, with a broad range of prices even for homes of similar size.
-
-## Part 3 · Prepare the features
-
-The notebook separates the 2006–2008 fitting period from 2009 validation, prepares numeric and neighbourhood inputs, and checks that both sets have matching columns.
-
-## Part 4 · Compare models
-
-On the 648 validation sales from 2009, linear regression averaged **US$26,372** in absolute error, compared with **US$56,861** for the training median. Linear regression is the candidate for Part 5. The 2010 test performance is still unknown.
-
-## Run the notebook in VS Code
-
-Install the Python and Jupyter extensions. From a Windows Miniconda prompt, run the following commands.
+From a Miniconda prompt with Git installed:
 
 ```shell
 git clone https://github.com/shainaulakh/ames-house-price-prediction.git
@@ -32,18 +18,65 @@ cd ames-house-price-prediction
 conda create -n ames-housing python=3.11 -y
 conda activate ames-housing
 python -m pip install -r requirements.txt
-mkdir data
-curl.exe -fL https://www.openintro.org/data/csv/ames.csv -o data/ames.csv
-code .
+python app.py
 ```
 
-If you already have a local clone, open its folder and run `git pull --ff-only` to get the latest files and install the updated requirements in your environment. Open `ames_house_price_prediction.ipynb`, choose **Select Kernel → Python Environments → ames-housing**, and select **Run All**. The CSV download needs internet access. Once downloaded, the notebook runs offline. On macOS or Linux, use `curl` in place of `curl.exe`.
+Open **http://127.0.0.1:8000** if your browser does not open automatically. Click **Estimate price** with the example values below. The fitted model ships with the repository, so the demo can run offline after installation. Stop the local server with **Ctrl+C**.
 
-## Project progress
+| Living area | Neighbourhood | Year built | Overall quality | Example prediction |
+|---:|---|---:|---:|---:|
+| 1,500 sq ft | NAmes (North Ames) | 1975 | 6 of 10 | US$176,583 |
 
-- [x] **1. Project setup and dataset** — Load real sales, inspect example records and distinguish features from the target.
-- [x] **2. Explore the data** — Reserve test sales and investigate patterns in the training set.
-- [x] **3. Prepare features** — Handle missing values and encode categories inside a reusable pipeline.
-- [x] **4. Compare models** — Compare linear regression with a median-price baseline on validation data.
-- [x] **5. Evaluate predictions** — Investigate errors, finalize the model and report held-out performance.
-- [ ] **6. Build and present the app** — Package the pipeline, demonstrate a prediction and document limitations.
+## Six parts, one notebook
+
+| Part | Work completed |
+|---|---|
+| 1. Define the problem | Read 2,930 sales and 82 columns. Identify the target, final sale price in historical USD. |
+| 2. Explore | Reserve 2010. Explore distributions, missing data and unusual sales in 2006–2009. |
+| 3. Prepare features | Fit median and most-frequent imputers and a neighbourhood one-hot encoder using earlier sales. |
+| 4. Compare models | Compare a median baseline with three-feature linear regression on 2009 sales. |
+| 5. Evaluate | Inspect validation residuals, test the addition of quality, refit the selected pipeline and evaluate the reserved year. |
+| 6. Demonstrate | Save and reload the full pipeline, reproduce an example and serve predictions through a local form. |
+
+## Results
+
+The validation comparison trained on **1,941 sales from 2006–2008** and evaluated **648 sales from 2009**. Lower mean absolute error (MAE) determined model selection.
+
+| Validation model | 2009 MAE |
+|---|---:|
+| Training median | $56,861 |
+| Linear regression using area, year built and neighbourhood | $26,372 |
+| Linear regression adding overall quality | **$23,272** |
+
+The final model and comparison baseline were refit on all **2,589 sales from 2006–2009**. Results below are from the **341 held-out 2010 sales**.
+
+| Test model | MAE | RMSE | R² |
+|---|---:|---:|---:|
+| Median baseline | $52,386 | $75,344 | −0.022 |
+| Final regression | **$23,467** | **$34,379** | **0.787** |
+
+Half of the final model’s absolute errors were at or below **$16,244**. The larger RMSE reflects the influence of large misses. These dollar figures summarize groups of sales. They do not provide a prediction interval for a particular house.
+
+## Reproduce the analysis
+
+In the repository root, download the CSV. On Windows:
+
+```powershell
+New-Item -ItemType Directory -Force data
+curl.exe -fL https://www.openintro.org/data/csv/ames.csv -o data/ames.csv
+```
+
+On macOS or Linux:
+
+```sh
+mkdir -p data
+curl -fL https://www.openintro.org/data/csv/ames.csv -o data/ames.csv
+```
+
+In VS Code, open the master notebook, select the **ames-housing** kernel and choose **Run All**. The final cell rebuilds `model/ames.joblib`. Restart the app to load the rebuilt model. The source CSV used for the published run had SHA-256 `cce822e6d71812f6edcf9d34bf42a2d65b927702c99ac4e6bcf20e5759d7be11`.
+
+## Data and limitations
+
+Dean De Cock documented residential sales from the Ames Assessor’s Office for 2006–2010. OpenIntro distributes the teaching CSV used here. The repository links to the source for download and attribution. Consult the source terms before redistributing the data. [OpenIntro data and variable descriptions](https://www.openintro.org/data/index.php?data=ames) · [Original study](https://doi.org/10.1080/10691898.2011.11889627)
+
+The model learns historical associations in one city. Quality ratings involve judgement, neighbourhood codes proxy local market conditions, and the model omits renovations, sale terms and many property details. Large or unusual homes can be especially difficult to price. The form accepts observed neighbourhoods and numeric ranges, but some combinations within those ranges may still be rare. The intended use is education and demonstration. A contemporary appraisal would require current comparable sales and independent validation.
