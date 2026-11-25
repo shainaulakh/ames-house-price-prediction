@@ -10,7 +10,11 @@ The data comes from the Ames Assessor's Office and covers 2006–2010. This repo
 
 [OpenIntro dataset and documentation](https://www.openintro.org/data/index.php?data=ames) · [Original study](https://doi.org/10.1080/10691898.2011.11889627)
 
-## Run Part 1 in VS Code
+## Part 2 · Explore training sales
+
+[Open the analysis and charts](notebooks/02_explore_training_sales.ipynb). We use 2,589 sales from 2006–2009 for exploration and reserve 341 sales from 2010 for final testing. In the training data, the median sale price was **$161,500**. Living area and price had a correlation of **0.709**, with a broad range of prices even for homes of similar size.
+
+## Run the notebooks in VS Code
 
 Install the Python and Jupyter extensions. From a Windows Miniconda prompt, run the following commands.
 
@@ -25,12 +29,12 @@ curl.exe -fL https://www.openintro.org/data/csv/ames.csv -o data/ames.csv
 code .
 ```
 
-If you already have a local clone, open its folder and run `git pull --ff-only` to get the notebook. Open the notebook, choose **Select Kernel → Python Environments → ames-housing**, and select **Run All**. The CSV download needs internet access. Once downloaded, the notebook runs offline. On macOS or Linux, use `curl` in place of `curl.exe`.
+If you already have a local clone, open its folder and run `git pull --ff-only` to get the latest files and install the updated requirements in your environment. Open either notebook, choose **Select Kernel → Python Environments → ames-housing**, and select **Run All**. The CSV download needs internet access. Once downloaded, the notebook runs offline. On macOS or Linux, use `curl` in place of `curl.exe`.
 
 ## Project progress
 
 - [x] **1. Project setup and dataset** — Load real sales, inspect example records and distinguish features from the target.
-- [ ] **2. Explore the data** — Reserve test sales and investigate patterns in the training set.
+- [x] **2. Explore the data** — Reserve test sales and investigate patterns in the training set.
 - [ ] **3. Prepare features** — Handle missing values and encode categories inside a reusable pipeline.
 - [ ] **4. Compare models** — Compare linear regression with a median-price baseline on validation data.
 - [ ] **5. Evaluate predictions** — Investigate errors, finalize the model and report held-out performance.
