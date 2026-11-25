@@ -45,5 +45,5 @@ If you already have a local clone, open its folder and run `git pull --ff-only` 
 - [x] **2. Explore the data** — Reserve test sales and investigate patterns in the training set.
 - [x] **3. Prepare features** — Handle missing values and encode categories inside a reusable pipeline.
 - [x] **4. Compare models** — Compare linear regression with a median-price baseline on validation data.
-- [ ] **5. Evaluate predictions** — Investigate errors, finalize the model and report held-out performance.
+- [x] **5. Evaluate predictions** — Investigate errors, finalize the model and report held-out performance.
 - [ ] **6. Build and present the app** — Package the pipeline, demonstrate a prediction and document limitations.
